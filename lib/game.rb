@@ -1,12 +1,12 @@
 require_relative "ui_handler"
-require_relative "guesser"
-
+require_relative "sequence_generator"
+# Handles game loop
 class Game
   def initialize(tries, sequence_length)
     @color_array = %w[blue red green yellow magenta white black grey]
     @ui_handler = UiHandler.new
-    @guesser = Guesser.new(@color_array)
-    @computer_guess_array = @guesser.generate_sequence(sequence_length)
+    @sequence_generator = SequenceGenerator.new(@color_array)
+    @computer_guess_array = @sequence_generator.generate_sequence(sequence_length)
     @tries_original = tries
     @tries_count = tries
     @guesses = []
@@ -40,6 +40,6 @@ class Game
   def restart_game
     @guesses = []
     @tries_count = @tries_original
-    @computer_guess_array = @guesser.generate_sequence
+    @computer_guess_array = @sequence_generator.generate_sequence
   end
 end

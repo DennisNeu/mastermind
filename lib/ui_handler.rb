@@ -1,5 +1,5 @@
 require "colorize"
-
+# Handles all text printed to terminal window
 class UiHandler
   def print_introduction(color_array, tries)
     print_seperator_new_line
