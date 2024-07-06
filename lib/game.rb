@@ -5,14 +5,23 @@ class Game
   def initialize(tries, sequence_length)
     @color_array = %w[blue red green yellow magenta white black grey]
     @ui_handler = UiHandler.new
-    @guesser = Guesser.new(sequence_length, @color_array)
-    @sequence_array = @guesser.generate_sequence
-    @tries = tries
+    @guesser = Guesser.new(@color_array)
+    @computer_guess_array = @guesser.generate_sequence(sequence_length)
+    @tries_original = tries
+    @tries_count = tries
+    @guesses = []
+  end
+
+  def start_game
+    while true
+
+    end
+    restart_game
   end
 
   # private
 
-  def get_player_choice
+  def player_choice
     @ui_handler.print_text("To make a choice, enter four of the shown numbers seperated by spaces")
     while true
       input = gets.chomp
@@ -21,12 +30,18 @@ class Game
       p input_array
       break if check_array(input_array)
     end
-    input_array
+    guesses << input_array
   end
 
   def check_array(array)
     return false unless array.is_a?(Array) && array.length == 4
 
     array.all? { |element| element.is_a?(Integer) && element.between?(1, 8) }
+  end
+
+  def restart_game
+    @guesses = []
+    @tries_count = @tries_original
+    @computer_guess_array = @guesser.generate_sequence
   end
 end
