@@ -25,12 +25,10 @@ class Game
     @ui_handler.print_text("To make a choice, enter four of the shown numbers seperated by spaces")
     while true
       input = gets.chomp
-      puts input
       input_array = input.split(" ").map(&:to_i)
-      p input_array
       break if check_array(input_array)
     end
-    guesses << input_array
+    @guesses << input_array
   end
 
   def check_array(array)

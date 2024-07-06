@@ -9,4 +9,4 @@ ui.print_introduction(color_array, 12)
 
 game = Game.new(color_array, 4)
 
-puts game.get_player_choice
+puts game.player_choice
