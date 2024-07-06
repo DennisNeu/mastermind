@@ -5,6 +5,6 @@ class Guesser
   end
 
   def generate_sequence
-    sequence_array = @color_array.shuffle.pop(@sequence_length)
+    @color_array.shuffle.pop(@sequence_length)
   end
 end
