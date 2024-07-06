@@ -11,6 +11,20 @@ class UiHandler
     print_seperator_new_line
   end
 
+  def print_colors(color_array)
+    string = ""
+    color_array.each { |color| string.concat("#{color.colorize(color.to_sym)} ") }
+    string
+  end
+
+  def print_text(string)
+    print_seperator_new_line
+    puts string
+    print_seperator_new_line
+  end
+
+  private
+
   def print_seperator_new_line
     puts ""
     print_seperator
@@ -19,11 +33,5 @@ class UiHandler
 
   def print_seperator
     puts "#" * 18
-  end
-
-  def print_colors(color_array)
-    string = ""
-    color_array.each { |color| string.concat("#{color.colorize(color.to_sym)} ") }
-    string
   end
 end
