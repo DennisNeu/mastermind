@@ -24,11 +24,25 @@ class UiHandler
     print_seperator_new_line
   end
 
-  def print_gameover
+  def print_gameover(secret_sequence)
+    puts "You lost. Correct sequence was"
+    puts print_all_colors(secret_sequence)
+    puts "Press enter to restart"
+  end
+
+  def print_win
+    puts "You won!!".colorize(color: :blue, background: :white, mode: :blink)
+  end
+
+  def print_tires_left(tries)
+    puts "#{tries.to_s.colorize(:red)} tries left!"
   end
 
   def print_feedback(feedback_hash = {})
     puts "empty hash given" if feedback_hash == {}
+
+    puts "#{feedback_hash[:correct_positions]} colors are in the correct position".colorize(background: :red)
+    puts "#{feedback_hash[:common_colors]} correct colors used".colorize(background: :blue)
   end
 
   def print_choice(user_sequence = [])
@@ -36,6 +50,7 @@ class UiHandler
 
     puts "You choose"
     puts print_all_colors(user_sequence)
+    puts ""
   end
 
   private

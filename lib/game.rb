@@ -8,6 +8,7 @@ class Game
     @ui_handler = UiHandler.new
     @sequence_generator = SequenceGenerator.new(@color_array)
     @comparator = Comparator.new
+    @sequence_length = sequence_length
     @secret_sequence = @sequence_generator.generate_sequence(sequence_length)
     @tries = tries
     @guesses = []
@@ -22,13 +23,14 @@ class Game
       generate_feedback
       @ui_handler.print_choice(@guesses.last)
       @ui_handler.print_feedback(@feedback.last)
+      @ui_handler.print_tires_left(calculate_tries)
       if @feedback.last[:correct_positions] == 4
-        win_game
+        @ui_handler.print_win
         break
       end
 
       if calculate_tries <= 0
-        game_over
+        @ui_handler.print_gameover(@secret_sequence)
         break
       end
     end
@@ -39,6 +41,7 @@ class Game
 
   def player_choice
     @ui_handler.print_text("To make a choice, enter four of the shown numbers seperated by spaces")
+    puts @ui_handler.print_all_colors(@color_array)
     while true
       input = gets.chomp
       input_array = input.split.map(&:to_i)
@@ -56,10 +59,11 @@ class Game
   end
 
   def restart_game
-    ui_handler
+    gets
     @guesses = []
     @tries_count = @tries_original
-    @computer_guess_array = @sequence_generator.generate_sequence
+    @computer_guess_array = @sequence_generator.generate_sequence(@sequence_length)
+    start_game
   end
 
   def calculate_tries
