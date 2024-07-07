@@ -29,6 +29,7 @@ class Game
       break if check_array(input_array)
     end
     @guesses << input_array
+    nil
   end
 
   def check_array(array)
