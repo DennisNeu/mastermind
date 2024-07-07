@@ -7,6 +7,6 @@ color_array = %w[blue red green yellow magenta white black grey]
 
 ui.print_introduction(color_array, 12)
 
-game = Game.new(color_array, 4)
+game = Game.new(12, 4)
 
-puts game.player_choice
+game.start_game

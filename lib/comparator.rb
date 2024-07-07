@@ -2,7 +2,7 @@
 # Will be used to used to generate required feedback
 class Comparator
   def compare_common_colors(secret_sequence, user_sequence)
-    secret_sequence & user_sequence
+    Array.new(secret_sequence & user_sequence).length
   end
 
   def compare_right_positions(secret_sequence, user_sequence)
