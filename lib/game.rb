@@ -6,6 +6,7 @@ class Game
     @color_array = %w[blue red green yellow magenta white black grey]
     @ui_handler = UiHandler.new
     @sequence_generator = SequenceGenerator.new(@color_array)
+    @comparator = Comparator.new
     @computer_guess_array = @sequence_generator.generate_sequence(sequence_length)
     @tries_original = tries
     @tries_count = tries
@@ -14,7 +15,9 @@ class Game
 
   def start_game
     while true
+      game_over if calculate_tries <= 0
 
+      player_choice
     end
     restart_game
   end
@@ -42,5 +45,9 @@ class Game
     @guesses = []
     @tries_count = @tries_original
     @computer_guess_array = @sequence_generator.generate_sequence
+  end
+
+  def calculate_tries
+    tries_original - guesses.length
   end
 end
