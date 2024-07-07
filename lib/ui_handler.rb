@@ -15,13 +15,27 @@ class UiHandler
 
   def print_all_colors(color_array)
     string = ""
-    color_array.each_with_index { |color, index| string.concat("#{index + 1}: #{color.colorize(color.to_sym)} ") }
+    color_array.each_with_index { |color, index| string.concat("#{index + 1}: #{color} ".colorize(color.to_sym)) }
     string
   end
 
   def print_text(string)
     puts string
     print_seperator_new_line
+  end
+
+  def print_gameover
+  end
+
+  def print_feedback(feedback_hash = {})
+    puts "empty hash given" if feedback_hash == {}
+  end
+
+  def print_choice(user_sequence = [])
+    puts "empty array given" if user_sequence == []
+
+    puts "You choose"
+    puts print_all_colors(user_sequence)
   end
 
   private
